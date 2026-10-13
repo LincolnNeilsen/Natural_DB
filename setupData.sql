@@ -2,14 +2,14 @@
 
 INSERT INTO Publisher (id, name) VALUES
     (1, 'Penguin Books'),
-    (2, 'Harper Press'),
+    (2, 'Tor Books'),
     (3, 'Tor Books'),
     (4, 'Vintage House'),
     (5, 'Blue Lantern Press');
 
 INSERT INTO Author (id, first_name, last_name) VALUES
     (1, 'Jane', 'Austen'),
-    (2, 'George', 'Orwell'),
+    (2, 'Robert', 'Jordon'),
     (3, 'Ursula', 'Le Guin'),
     (4, 'Isaac', 'Asimov'),
     (5, 'Toni', 'Morrison'),
@@ -21,7 +21,7 @@ INSERT INTO Author (id, first_name, last_name) VALUES
 
 INSERT INTO Review (id, rating, description) VALUES
     (1, 5, 'A witty, sharp social comedy.'),
-    (2, 4, 'Chilling and still relevant.'),
+    (2, 5, 'Peak fantasy. Will never be beaten'),
     (3, 5, 'Rich worldbuilding and quiet depth.'),
     (4, 3, 'Clever ideas, uneven pacing.'),
     (5, 5, 'Haunting and beautifully written.'),
