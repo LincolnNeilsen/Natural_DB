@@ -1,0 +1,78 @@
+[
+  {
+    "question": "How many books are by robert jordan?",
+    "strategy": "zero_shot",
+    "sql": "SELECT COUNT(*) FROM Book b JOIN book_to_author ba ON b.id = ba.book_id JOIN Author a ON ba.author_id = a.id WHERE a.first_name = 'Robert' AND a.last_name = 'Jordan';",
+    "rows": [
+      {
+        "COUNT(*)": 0
+      }
+    ],
+    "answer": "There are no books by Robert Jordan in the database."
+  },
+  {
+    "question": "how many books are by robert Jordon ?",
+    "strategy": "zero_shot",
+    "sql": "SELECT COUNT(*) FROM Book INNER JOIN book_to_author ON Book.id = book_to_author.book_id INNER JOIN Author ON book_to_author.author_id = Author.id WHERE Author.first_name = 'Robert' AND Author.last_name = 'Jordan';",
+    "rows": [
+      {
+        "COUNT(*)": 0
+      }
+    ],
+    "answer": "There are no books by Robert Jordan in the database."
+  },
+  {
+    "question": "what is the highest rated book",
+    "strategy": "zero_shot",
+    "sql": "SELECT Book.title, MAX(Review.rating) AS highest_rating \nFROM Book \nJOIN Review ON Book.review_id = Review.id \nGROUP BY Book.id \nORDER BY highest_rating DESC \nLIMIT 1;",
+    "rows": [
+      {
+        "title": "Pride and Prejudice",
+        "highest_rating": 5
+      }
+    ],
+    "answer": "The highest rated book is \"Pride and Prejudice\" with a rating of 5."
+  },
+  {
+    "question": "Which publisher has the highest average rating few_shot",
+    "strategy": "zero_shot",
+    "sql": "SELECT Publisher.name, AVG(Review.rating) AS average_rating\nFROM Publisher\nJOIN Book ON Publisher.id = Book.publisher_id\nJOIN Review ON Book.review_id = Review.id\nGROUP BY Publisher.id\nORDER BY average_rating DESC\nLIMIT 1;",
+    "rows": [
+      {
+        "name": "Penguin Books",
+        "average_rating": 5.0
+      }
+    ],
+    "answer": "The publisher with the highest average rating is Penguin Books, with an average rating of 5.0."
+  },
+  {
+    "question": "Which publisher has the highest average rating,\\ few_shot",
+    "strategy": "zero_shot",
+    "sql": "SELECT Publisher.name, AVG(Review.rating) AS average_rating\nFROM Publisher\nJOIN Book ON Publisher.id = Book.publisher_id\nJOIN Review ON Book.review_id = Review.id\nGROUP BY Publisher.id\nORDER BY average_rating DESC\nLIMIT 1;",
+    "rows": [
+      {
+        "name": "Penguin Books",
+        "average_rating": 5.0
+      }
+    ],
+    "answer": "The publisher with the highest average rating is Penguin Books, with an average rating of 5.0."
+  },
+  {
+    "question": "whatis an authors favorite genre",
+    "strategy": "zero_shot",
+    "sql": "SELECT genre FROM Book JOIN book_to_author ON Book.id = book_to_author.book_id JOIN Author ON book_to_author.author_id = Author.id WHERE Author.first_name = ? AND Author.last_name = ?;",
+    "error": "Incorrect number of bindings supplied. The current statement uses 2, and there are 0 supplied.",
+    "answer": "Sorry, I couldn't answer that (Incorrect number of bindings supplied. The current statement uses 2, and there are 0 supplied.)."
+  },
+  {
+    "question": "what is an authors favorite genre",
+    "strategy": "zero_shot",
+    "sql": "SELECT genre FROM Book \nJOIN book_to_author ON Book.id = book_to_author.book_id \nJOIN Author ON book_to_author.author_id = Author.id \nGROUP BY genre \nORDER BY COUNT(*) DESC \nLIMIT 1;",
+    "rows": [
+      {
+        "genre": "Fantasy"
+      }
+    ],
+    "answer": "The author's favorite genre is Fantasy."
+  }
+]
