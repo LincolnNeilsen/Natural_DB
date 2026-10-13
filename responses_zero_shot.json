@@ -1,0 +1,56 @@
+[
+  {
+    "question": "what is Brandon Sandersons lowest rated book",
+    "strategy": "zero_shot",
+    "sql": "SELECT Book.title, MIN(Review.rating) AS lowest_rating \nFROM Book \nJOIN book_to_author ON Book.id = book_to_author.book_id \nJOIN Author ON book_to_author.author_id = Author.id \nJOIN Review ON Book.review_id = Review.id \nWHERE Author.first_name = 'Brandon' AND Author.last_name = 'Sanderson' \nGROUP BY Book.id \nORDER BY lowest_rating \nLIMIT 1;",
+    "rows": [],
+    "answer": "There are no reviews available for any of Brandon Sanderson's books in the database, so I cannot determine his lowest rated book."
+  },
+  {
+    "question": "What is the most popular genre",
+    "strategy": "zero_shot",
+    "sql": "SELECT genre, COUNT(*) AS genre_count FROM Book GROUP BY genre ORDER BY genre_count DESC LIMIT 1;",
+    "rows": [
+      {
+        "genre": "Science Fiction",
+        "genre_count": 4
+      }
+    ],
+    "answer": "The most popular genre is Science Fiction."
+  },
+  {
+    "question": "what is the most popular publisher",
+    "strategy": "zero_shot",
+    "sql": "SELECT publisher_id, COUNT(*) AS book_count FROM Book GROUP BY publisher_id ORDER BY book_count DESC LIMIT 1;",
+    "rows": [
+      {
+        "publisher_id": 5,
+        "book_count": 3
+      }
+    ],
+    "answer": "The most popular publisher is the one with the ID 5, which has published 3 books."
+  },
+  {
+    "question": "what is the best fiction book",
+    "strategy": "zero_shot",
+    "sql": "SELECT Book.title, MAX(Review.rating) AS best_rating \nFROM Book \nJOIN Review ON Book.review_id = Review.id \nWHERE Book.genre = 'Fiction' \nGROUP BY Book.id \nORDER BY best_rating DESC \nLIMIT 1;",
+    "rows": [],
+    "answer": "There are no fiction books in the database with ratings."
+  },
+  {
+    "question": "what is the oldest book",
+    "strategy": "zero_shot",
+    "sql": "SELECT * FROM Book ORDER BY published_date ASC LIMIT 1;",
+    "rows": [
+      {
+        "id": 1,
+        "title": "Pride and Prejudice",
+        "publisher_id": 1,
+        "genre": "Romance",
+        "review_id": 1,
+        "published_date": "1813-01-28"
+      }
+    ],
+    "answer": "The oldest book is \"Pride and Prejudice,\" published on January 28, 1813."
+  }
+]

@@ -1,0 +1,107 @@
+[
+  {
+    "question": "How many books does Brandon Sanderson have?",
+    "strategy": "few_shot",
+    "sql": "SELECT COUNT(*) FROM book_to_author ba JOIN Author a ON a.id = ba.author_id WHERE a.last_name = 'Sanderson';",
+    "rows": [
+      {
+        "COUNT(*)": 0
+      }
+    ],
+    "answer": "Brandon Sanderson has no books in the database."
+  },
+  {
+    "question": "Which publisher has the highest average rating?",
+    "strategy": "few_shot",
+    "sql": "SELECT p.name FROM Publisher p JOIN Book b ON b.publisher_id = p.id JOIN Review r ON r.id = b.review_id GROUP BY p.id ORDER BY AVG(r.rating) DESC LIMIT 1;",
+    "rows": [
+      {
+        "name": "Penguin Books"
+      }
+    ],
+    "answer": "The publisher with the highest average rating is Penguin Books."
+  },
+  {
+    "question": "What is the oldest book?",
+    "strategy": "few_shot",
+    "sql": "SELECT title FROM Book ORDER BY published_date ASC LIMIT 1;",
+    "rows": [
+      {
+        "title": "Pride and Prejudice"
+      }
+    ],
+    "answer": "The oldest book is \"Pride and Prejudice.\""
+  },
+  {
+    "question": "What is the highest rated book?",
+    "strategy": "few_shot",
+    "sql": "SELECT b.title FROM Book b JOIN Review r ON r.id = b.review_id ORDER BY r.rating DESC LIMIT 1;",
+    "rows": [
+      {
+        "title": "Pride and Prejudice"
+      }
+    ],
+    "answer": "The highest rated book is \"Pride and Prejudice.\""
+  },
+  {
+    "question": "How many books are by Robert Jordan?",
+    "strategy": "few_shot",
+    "sql": "SELECT COUNT(*) FROM book_to_author ba JOIN Author a ON a.id = ba.author_id WHERE a.last_name = 'Jordan';",
+    "rows": [
+      {
+        "COUNT(*)": 0
+      }
+    ],
+    "answer": "There are no books by Robert Jordan in the database."
+  },
+  {
+    "question": "What is the best fiction book?",
+    "strategy": "few_shot",
+    "sql": "SELECT b.title FROM Book b JOIN Review r ON r.id = b.review_id WHERE b.genre = 'Fiction' ORDER BY r.rating DESC LIMIT 1;",
+    "rows": [],
+    "answer": "There is no available data on the best fiction book."
+  },
+  {
+    "question": "What is the most popular publisher?",
+    "strategy": "few_shot",
+    "sql": "SELECT p.name FROM Publisher p JOIN Book b ON b.publisher_id = p.id JOIN Review r ON r.id = b.review_id GROUP BY p.id ORDER BY COUNT(r.rating) DESC LIMIT 1;",
+    "rows": [
+      {
+        "name": "Blue Lantern Press"
+      }
+    ],
+    "answer": "The most popular publisher is Blue Lantern Press."
+  },
+  {
+    "question": "What is an author's favorite genre?",
+    "strategy": "few_shot",
+    "sql": "SELECT b.genre FROM book_to_author ba JOIN Book b ON b.id = ba.book_id JOIN Author a ON a.id = ba.author_id WHERE a.first_name = 'AuthorFirstName' AND a.last_name = 'AuthorLastName';",
+    "rows": [],
+    "answer": "The author's favorite genre is not available in the database."
+  },
+  {
+    "question": "Whatis an author's favorite genre?",
+    "strategy": "few_shot",
+    "sql": "SELECT b.genre FROM book_to_author ba JOIN Book b ON b.id = ba.book_id JOIN Author a ON a.id = ba.author_id WHERE a.first_name = 'AuthorFirstName' AND a.last_name = 'AuthorLastName';",
+    "rows": [],
+    "answer": "The author's favorite genre is not available in the database."
+  },
+  {
+    "question": "What is the most popular genre?",
+    "strategy": "few_shot",
+    "sql": "SELECT genre FROM Book GROUP BY genre ORDER BY COUNT(*) DESC LIMIT 1;",
+    "rows": [
+      {
+        "genre": "Science Fiction"
+      }
+    ],
+    "answer": "The most popular genre is Science Fiction."
+  },
+  {
+    "question": "What is Brandon Sanderson's lowest rated book?",
+    "strategy": "few_shot",
+    "sql": "SELECT b.title FROM Book b JOIN book_to_author ba ON b.id = ba.book_id JOIN Author a ON a.id = ba.author_id JOIN Review r ON r.id = b.review_id WHERE a.last_name = 'Sanderson' ORDER BY r.rating ASC LIMIT 1;",
+    "rows": [],
+    "answer": "There are no books by Brandon Sanderson in the database, so I cannot determine his lowest rated book."
+  }
+]
