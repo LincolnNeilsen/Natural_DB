@@ -1,19 +1,6 @@
 # Natural-Language Books Database
 
-A plain-English question bot for a books database. You type a question, GPT writes a SQLite query against the schema, the query runs on the database, and GPT turns the rows into a plain-English answer.
-
-Code: https://github.com/LincolnNeilsen/Natural_DB
-
-## Files
-
-- `db_bot.py`: starts the bot, builds the database, sends questions to OpenAI, and logs each turn.
-- `setup.sql`: creates the tables.
-- `setupData.sql`: fills the tables with mock books, authors, publishers, and reviews.
-- `config.json`: holds the OpenAI key. It is **not** in the repo (see `.gitignore`). Create your own with an `"openaiKey"` field.
-- `responses.json`, `responses_zero_shot.json`: logs of questions, SQL, rows, and answers.
-- `examples.md`: example questions with their SQL and results, both working and failing.
-- `REF/init.jpg`: the schema diagram.
-- `books.db`: the SQLite database. It is rebuilt from the two SQL files on every run, so you don't need to commit it. It is listed in `.gitignore`.
+A simple books database with books, authors, reviews, and publishers.
 
 ## Schema
 
